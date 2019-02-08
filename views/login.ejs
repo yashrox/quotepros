@@ -1,0 +1,28 @@
+<% include  layout/header %>
+
+  <div class ="container">
+    <div class="row">
+  <div class="col-lg-12">
+      <div class ="jumbotron" style="width:45%; margin-left:30%;">
+        <h1>LOGIN</h1>
+        <form action="/login" method="post">
+          <div class="form-group">
+            <label> USERNAME </label>
+            <input type="text" class="form-control" name="username">
+            </div>
+            <div class="form-group">
+              <label> password </label>
+              <input type="password" class="form-control" name="password">
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block btn-lg"> LOGIN </button>
+                </div>
+        </form>
+
+      </div>
+  </div>
+</div>
+  </div>
+
+
+<% include layout/footer %>

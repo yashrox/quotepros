@@ -1,0 +1,51 @@
+<% include ../layout/header %>
+
+  <div class ="container">
+<div class="row">
+  <div class="col-lg-12">
+      <div class ="jumbotron" style="width:45%; margin-left:30%;">
+        <h1>CREATE QUOTATION</h1>
+        <form action="/content" method="post">
+          <div class="form-group">
+            <label> content </label>
+            <input type="text" class="form-control" name="quote">
+            </div>
+            <div class="form-group">
+              <label> image </label>
+              <input type="text" class="form-control" name="image">
+              </div>
+
+              <div class="form-group">
+                <label> description </label>
+                <textarea rows ="15" column="10" name="description" class="form-control"></textarea>
+                </div>
+
+                <div class="form-group">
+                  <label>user image </label>
+                  <input type="text" class="form-control" name="userimg">
+                  </div>
+
+                  <div class="form-group">
+                    <label> username </label>
+                    <input type="text" class="form-control" name="name">
+                    </div>
+
+                    <div class="form-group">
+                      <label> country </label>
+                      <input type="text" class="form-control" name="country">
+                      </div>
+
+
+
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block btn-lg"> CREATE </button>
+                </div>
+        </form>
+
+      </div>
+  </div>
+</div>
+  </div>
+
+
+<% include ../layout/footer %>

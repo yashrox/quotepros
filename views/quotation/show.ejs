@@ -1,0 +1,144 @@
+<% include ../layout/header %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4">
+
+      <div style="text-align:center; padding:0;" class="jumbotron">
+        <div class="thumbnail">
+        <h2> AUTHOR INFORMATION </h2>
+        <img src ="<%= data.userimg %>" class="img-circle img-thumbnail" style="max-height :5% ; max-width: 50%;">
+        <h5> <strong>NAME</strong> - <%= data.name %></h5>
+      </div>
+    </div>
+      <div class= "wells">
+        <div class= "rows">
+          <div class="col-xs-10" style="background-color : 	rgb(0, 255, 128); text-align:center;">
+            <h1 style="text-align:center;">LOCATION </h1>
+        <h2> <strong>COUNTRY</strong> - <%= data.country %></h2>
+        <img src = "https://www.google.co.in/maps/vt/data=CnwJzLJf-IQXd3c6m_qO8mMk-_Pu6vQu714Fy6zZQ9AffDsM_l4_oWdVkWd4N7izBIvf7wW7WZw_R7LyskW6RsGjfyTKJ2exfqqA2V3nf6HSP1x4-jE8Ou3-1vfH9amxgvNVu8Gv4BY2LGXjvtPvm4a1T3_rRUJ5vhrnJARXrNOLBri0f7qIXzGBdyr_Dnf5eayEH793jLi-H3q3XdZT1931201H30qNigDuATmLNg" class="img-thumbnail">
+         <button type="button" class="btn btn-primary btn-block"><i class="fa fa-location-arrow" style="color:black; font-size: 30px;"></i> </button>
+
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="col-lg-8">
+        <div class= "thumbnail">
+
+        <img src="<%= data.image %>"   class="img-thumbnail" style="width: 100%;">
+          <h3 class="card-title" style="text-align: center;"> <strong> ~ <%= data.quote.toUpperCase() %> ~</strong> </h3>
+
+          <p style="font-family: 'Pacifico', cursive; font-style: itlaics; color: grey;" class="card-text"><%= data.description %></p>
+
+          <br>
+          <div>
+            <% if(currentUser &&  currentUser._id.equals(data.author.id)){ %>
+          <a href="/content/<%= data.id %>/edit" class="btn btn-primary">EDIT</a>
+          <form action="/content/<%= data.id %>?_method=DELETE" method="post" style="display:inline;">
+              <button type="submit" class="btn btn-warning" >DELETE</button>
+          </form>
+        <%  }  %>
+        </div>
+      </div>
+
+        <div class ="wells">
+          <div class="row">
+            <div class="col-lg-12">
+
+
+          <!-- Trigger the modal with a button -->
+          <button type="button" class="btn btn-info btn-sm pull-right" data-toggle="modal" data-target="#myModal" >ADD A COMMENT</button>
+          <!-- Modal -->
+          <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">COMMENT</h4>
+                  <button type="submit" class="close" data-dismiss="modal">&times Close </button>
+
+                </div>
+                <div class="modal-body">
+                  <form action="/content/<%= data._id %>/comment" method="post">
+                    <div class="form-group">
+                      <label>TITLE</label>
+                      <input type="text" class="form-control" name="com[title]">
+                      </div>
+
+                </div>
+                <div class="modal-footer form-group">
+                  <input type = "submit" value="SUBMIT" class="btn btn-primary">
+</form>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+
+        <%    data.comments.forEach( (val) => {  %>
+
+                <div class="row">
+                  <div class ="col-lg-12">
+                    <hr>
+                  <p>  <strong><%= val.content.username %></strong> </p>
+                    <p><%= val.title %> <span class="pull-right"> <%= val.date.toString() %> </span> </p>
+                    <div style="display : inline-flex;">
+
+                        <%    if(currentUser && val.content.id.equals(currentUser._id)) {          %>
+
+                      <!-- Trigger the modal with a button -->
+<button type="button" class="btn btn-info " data-toggle="modal" data-target="#myModals" style = "margin-right : 1em;" >Edit</button>
+
+<!-- Modal -->
+<div id="myModals" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">EDIT</h4>
+      </div>
+      <div class="modal-body">
+          <form action = "/content/<%= data._id%>/comment/<%= val._id %>?_method=PUT" method = "post" >
+            <div class="form-group">
+            <input type = "text" name = "com[title]" value = "<%= val.title %>" class="form-control">
+          </div>
+      </div>
+      <div class="modal-footer">
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+    <form action = "/content/<%= data._id %>/comment/<%= val._id %>?_method=DELETE" method="post" >
+      <button type="submit" class="btn btn-danger">DELETE</button>
+    </form>
+
+<%  } %>
+
+  </div>
+                </div>
+              </div>
+            </div>
+                <hr>
+        <%    })   %>
+
+
+        </div>
+      </div>
+    </div>
+
+</div>
+</div>
+</div>
+
+<% include ../layout/footer %>
